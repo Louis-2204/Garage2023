@@ -78,19 +78,11 @@ VALUES (
         "b@gmail.com",
         "456",
         "user"
-    )
+    );
 CREATE VIEW
     vehiculesInterventions as (
-        SELECT
-            c.nom,
-            v.matricule,
-            count(i.idintervention) as nb
-        from
-            client c,
-            vehicule v,
-            intervention i
-        where
-            c.idclient = v.idclient
-            and v.idvehicule = i.idvehicule
-        GROUP BY v.matricule
-    );
+       select DISTINCT c.idclient,
+        (select DISTINCT group_concat(matricule separator "  ") from vehicule where idclient = c.idclient) as matricule,
+        count(idintervention) as nb
+        from client c,vehicule v,intervention i where c.idclient=v.idclient and i.idvehicule = v.idvehicule GROUP BY c.idclient
+);
