@@ -1,4 +1,4 @@
-<h2>Gestion des Clientss</h2>
+<h2>Gestion des Clients</h2>
 
 <?php
 $leClient = null;
