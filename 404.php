@@ -1,0 +1,1 @@
+<img class="mt-5" src="images/404.png" alt="" width="300">
