@@ -1,8 +1,7 @@
-<h2>Gestion des Clients</h2>
-
 <?php
-$leClient = null;
 if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
+  echo "<h2>Gestion des Clients</h2>";
+  $leClient = null;
   if (isset($_GET['action']) and isset($_GET['idclient'])) {
     $action = $_GET['action'];
     $idclient = $_GET['idclient'];
@@ -37,17 +36,17 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
     header("Location: index.php?page=2");
   }
   require_once("vue/vue_insert_client.php");
-}
 
-if (isset($_POST['Filtrer'])) {
-  $mot = $_POST['mot'];
-  $lesClients = $unControleur->selectLikeClients($mot);
-} else {
-  $lesClients = $unControleur->selectAllClients();
-}
+  if (isset($_POST['Filtrer'])) {
+    $mot = $_POST['mot'];
+    $lesClients = $unControleur->selectLikeClients($mot);
+  } else {
+    $lesClients = $unControleur->selectAllClients();
+  }
 
-require_once("vue/vue_les_clients.php");
-require_once("_footer.php");
+  require_once("vue/vue_les_clients.php");
+  require_once("_footer.php");
+}
 ?>
 <style>
   body {

@@ -29,7 +29,7 @@
     <tr>
       <td>
         <label for="idvehicule">Id Véhicule</label>
-        <select class="form-control" name="idvehicule" value="<?php if ($lIntervention != null) echo $lIntervention['idvehicule']; ?>">
+        <select class="form-select pointer" name="idvehicule" value="<?php if ($lIntervention != null) echo $lIntervention['idvehicule']; ?>">
           <?php
           $lesVehicules = $unControleur->selectAllVehicules();
           foreach ($lesVehicules as $unVehicule) {
@@ -53,7 +53,7 @@
     <tr>
       <td>
         <label for="idtechnicien">Id Technicien</label>
-        <select class=" form-control mb-3" name="idtechnicien" value="<?php if ($lIntervention != null) echo $lIntervention['idtechnicien']; ?>">
+        <select class=" form-select pointer mb-3" name="idtechnicien" value="<?php if ($lIntervention != null) echo $lIntervention['idtechnicien']; ?>">
           <?php
           $lesTechniciens = $unControleur->selectAllTechniciens();
           foreach ($lesTechniciens as $unTechnicien) {

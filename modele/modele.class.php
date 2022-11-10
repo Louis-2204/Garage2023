@@ -104,6 +104,43 @@ class Modele
       return null;
     }
   }
+
+  function selectMailClient($email, $idclient)
+  {
+    $requete = "select * from CLIENT where email = :email and idclient = :idclient;";
+    $donnees = array(
+      ":email" => $email,
+      ":idclient" => $idclient,
+    );
+    if ($this->unPdo != null) {
+      //on prépare la requête
+      $select = $this->unPdo->prepare($requete);
+      //on exécute la requête
+      $select->execute($donnees);
+      $unClient = $select->fetch();
+      return $unClient;
+    } else {
+      return null;
+    }
+  }
+  function selectIdClient($email)
+  {
+    $requete = "select * from CLIENT where email = :email";
+    $donnees = array(
+      ":email" => $email,
+    );
+    if ($this->unPdo != null) {
+      //on prépare la requête
+      $select = $this->unPdo->prepare($requete);
+      //on exécute la requête
+      $select->execute($donnees);
+      $unClient = $select->fetch();
+      return $unClient;
+    } else {
+      return null;
+    }
+  }
+
   function selectLikeClients($mot)
   {
     if ($this->unPdo != null) {
@@ -115,6 +152,21 @@ class Modele
       $select->execute($donnees);
       $lesClients = $select->fetchAll();
       return $lesClients;
+    } else {
+      return null;
+    }
+  }
+  function countVehiculeUser($idclient)
+  {
+    if ($this->unPdo != null) {
+      $requete = "select count(*) as nb from vehicule where idclient = :idclient;";
+      $donnees = array(
+        ":idclient" => $idclient
+      );
+      $select = $this->unPdo->prepare($requete);
+      $select->execute($donnees);
+      $unResultat = $select->fetch();
+      return $unResultat;
     } else {
       return null;
     }

@@ -39,7 +39,18 @@ class Controleur
     $lesClients = $this->unModele->selectLikeClients($mot);
     return $lesClients;
   }
-
+  public function selectMailClient($email, $idclient)
+  {
+    return $this->unModele->selectMailClient($email, $idclient);
+  }
+  public function selectIdClient($email)
+  {
+    return $this->unModele->selectIdClient($email);
+  }
+  public function countVehiculeUser($idclient)
+  {
+    return $this->unModele->countVehiculeUser($idclient);
+  }
   //Techniciens
 
   public function insertTechnicien($tab)

@@ -78,19 +78,21 @@ VALUES (
         "b@gmail.com",
         "456",
         "user"
-    )
-CREATE VIEW
-    vehiculesInterventions as (
-        SELECT
-            c.nom,
-            v.matricule,
-            count(i.idintervention) as nb
-        from
-            client c,
-            vehicule v,
-            intervention i
-        where
-            c.idclient = v.idclient
-            and v.idvehicule = i.idvehicule
-        GROUP BY v.matricule
     );
+
+CREATE VIEW VEHICULESINTERVENTIONS AS 
+	 (
+	    SELECT
+	        c.nom,
+	        v.matricule,
+	        count(i.idintervention) as nb
+	    from
+	        client c,
+	        vehicule v,
+	        intervention i
+	    where
+	        c.idclient = v.idclient
+	        and v.idvehicule = i.idvehicule
+	    GROUP BY v.matricule
+	);
+; 

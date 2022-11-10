@@ -25,17 +25,16 @@ $unControleur = new Controleur();
       $mdp = $_POST['mdp'];
       $unUser = $unControleur->verifConnection($email, $mdp);
       if ($unUser == null) {
-        echo "<div class='col-md-3 alert alert-danger'>Verifiez vos identifiants</div>";
+        echo "<div class='alert alert-danger'>Verifiez vos identifiants</div>";
       } else {
         $_SESSION['email'] = $unUser['email'];
         $_SESSION['nom'] = $unUser['nom'];
         $_SESSION['prenom'] = $unUser['prenom'];
         $_SESSION['role'] = $unUser['role'];
-
         header("location: index.php?page=0");
       }
     }
-    if (isset($_SESSION['email'])) {
+    if (isset($_SESSION['email']) && $_SESSION['role'] == 'admin') {
       echo
       '<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
@@ -88,6 +87,50 @@ $unControleur = new Controleur();
           break;
         case 5:
           require_once("interventions.php");
+          break;
+        case 6:
+          session_destroy();
+          unset($_SESSION['email']);
+          header("location: index.php?page=0");
+          break;
+        default:
+          require_once("404.php");
+      }
+    } elseif (isset($_SESSION['email'])) {
+      echo
+      '<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExample03">
+          <ul class="navbar-nav mx-auto my-2 text-center">
+            <li class="nav-item mx-4">
+              <a class="nav-item" href="index.php?page=0">Accueil</a>
+            </li>
+            <li class="nav-item mx-4">
+              <a class="nav-item" href="index.php?page=4">Véhicules</a>
+            </li>
+            <li class="nav-item mx-4">
+              <a class="nav-item" href="index.php?page=6">Deconnexion</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>';
+
+      if (isset($_GET['page'])) {
+        $page = $_GET['page'];
+      } else {
+        $page = 0;
+      }
+      switch ($page) {
+        case 0:
+          require_once("home.php");
+          break;
+        case 4:
+          require_once("vehicules.php");
           break;
         case 6:
           session_destroy();

@@ -1,8 +1,7 @@
-<h2>Gestion des Interventions</h2>
-
 <?php
-$lIntervention = null;
 if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
+  echo "<h2>Gestion des Interventions</h2>";
+  $lIntervention = null;
   if (isset($_GET['action']) and isset($_GET['idintervention'])) {
     $action = $_GET['action'];
     $idintervention = $_GET['idintervention'];
@@ -38,15 +37,14 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
     header("Location: index.php?page=5");
   }
   require_once("vue/vue_insert_intervention.php");
-}
 
-if (isset($_POST['Filtrer'])) {
-  $mot = $_POST['mot'];
-  $lesInterventions = $unControleur->selectLikeInterventions($mot);
-} else {
-  $lesInterventions = $unControleur->selectAllInterventions();
-}
+  if (isset($_POST['Filtrer'])) {
+    $mot = $_POST['mot'];
+    $lesInterventions = $unControleur->selectLikeInterventions($mot);
+  } else {
+    $lesInterventions = $unControleur->selectAllInterventions();
+  }
 
-require_once("vue/vue_les_interventions.php");
-require_once("_footer.php")
-?>
+  require_once("vue/vue_les_interventions.php");
+  require_once("_footer.php");
+}
