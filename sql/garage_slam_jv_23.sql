@@ -82,7 +82,7 @@ VALUES (
 CREATE VIEW
     vehiculesInterventions as (
        select DISTINCT c.nom,
-        (select DISTINCT group_concat(matricule separator "  ") from vehicule where idclient = c.idclient) as matricule,
+        (select DISTINCT group_concat(matricule separator "  &  ") from vehicule where idclient = c.idclient) as matricule,
         count(idintervention) as nb
         from client c,vehicule v,intervention i where c.idclient=v.idclient and i.idvehicule = v.idvehicule GROUP BY c.idclient
 );
