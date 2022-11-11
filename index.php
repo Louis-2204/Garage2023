@@ -11,15 +11,44 @@ $unControleur = new Controleur();
 <head>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
   <meta charset="utf-8">
-  <title>Gestion d'un garage 2</title>
+  <title>Gestion d'un garage</title>
 </head>
 
 <body>
   <center>
     <?php
+
+
     if (!isset($_SESSION['email'])) {
-      require_once("vue/vue_connexion.php");
+      if(isset($_GET['Inscription'])){
+        require_once("vue/vue_inscription.php");
+      }else{
+        require_once("vue/vue_connexion.php");
+      }
     }
+
+    if(isset($_POST['Sinscrire'])){
+      $email = $_POST['email'];
+      $mdp = $_POST['mdp'];
+      $nom = $_POST['nom'];
+      $prenom = $_POST['prenom'];
+      $Sinscrire = $unControleur->Sinscrire($email,$mdp,$nom,$prenom);
+      if($Sinscrire == "Existe"){
+        echo "<div class='alert alert-danger'>Cette E-mail est déjà utilisée.</div>";
+      }else{
+        $unUser = $unControleur->verifConnection($email, $mdp);
+        if ($unUser == null) {
+          echo "<div class='alert alert-danger'>Verifiez vos identifiants</div>";
+        } else {
+          $_SESSION['email'] = $unUser['email'];
+          $_SESSION['nom'] = $unUser['nom'];
+          $_SESSION['prenom'] = $unUser['prenom'];
+          $_SESSION['role'] = $unUser['role'];
+          header("location: index.php?page=0");
+        }
+      }
+    }
+
     if (isset($_POST['seConnecter'])) {
       $email = $_POST['email'];
       $mdp = $_POST['mdp'];
