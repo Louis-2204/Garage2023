@@ -11,7 +11,7 @@ $unControleur = new Controleur();
 <head>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
   <meta charset="utf-8">
-  <title>Gestion d'un garage</title>
+  <title>Gestion d'un garage 2</title>
 </head>
 
 <body>
