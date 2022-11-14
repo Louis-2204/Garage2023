@@ -1,12 +1,13 @@
 <body class="large-screen">
   <h3>Liste des clients</h3>
   <form action="" method="POST">
-    <table class="col-md-5">
-      <td><label for="mot">Filtrer par :</label>
+    <div class="filtrer">
+      <div class="filtrer1block">
+        <label for="mot">Filtrer par :</label>
         <input class="form-control mb-2" type="text" name="mot" id="mot">
-        <input class="btn btn-primary mb-4" type="submit" name="Filtrer" value="Filtrer">
-      </td>
-    </table>
+      </div>
+      <div class="filtrer2block"> <input class="btn btn-primary mb-4" type="submit" name="Filtrer" value="Filtrer"></div>
+    </div>
   </form>
   <br><br>
   <?php
@@ -58,3 +59,29 @@
     </div>
   </div>
 </body>
+
+<style>
+  h4 {
+    font-size: 13px;
+    position: relative;
+    left: -517px;
+  }
+
+  .filtrer {
+    display: flex;
+    width: 300px;
+    position: relative;
+    top: 70px;
+    right: -470px;
+  }
+
+  .filtrer1block {
+    text-align: left;
+  }
+
+  .filtrer2block {
+    position: relative;
+    top: 24px;
+    margin-left: 10px;
+  }
+</style>
