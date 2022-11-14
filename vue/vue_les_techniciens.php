@@ -35,7 +35,7 @@
           <?php
           if (isset($lesTechniciens)) {
             foreach ($lesTechniciens as $unTechnicien) {
-              echo "<tr class='bordereven'>";
+              echo "<tr>";
               echo "<td>" . $unTechnicien['idtechnicien'] . "</td>";
               echo "<td>" . $unTechnicien['nom'] . "</td>";
               echo "<td>" . $unTechnicien['prenom'] . "</td>";
