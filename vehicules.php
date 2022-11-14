@@ -1,4 +1,4 @@
-<h2>Gestion des Véhicules</h2>
+<h2 class='my-3'>Gestion des Véhicules</h2>
 
 <?php
 $leVehicule = null;

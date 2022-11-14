@@ -133,4 +133,8 @@
     }
 
   }
+
+  function openform() {
+    document.getElementById('hidden').classList.add('ouvert');
+  }
 </script>

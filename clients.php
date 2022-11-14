@@ -1,6 +1,6 @@
 <?php
 if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
-  echo "<h2>Gestion des Clients</h2>";
+  echo "<h2 class='my-3'>Gestion des Clients</h2>";
   $leClient = null;
   if (isset($_GET['action']) and isset($_GET['idclient'])) {
     $action = $_GET['action'];

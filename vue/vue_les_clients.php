@@ -48,7 +48,7 @@
               if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
                 echo "<td>";
                 echo "<div>";
-                echo "<a href='index.php?page=2&action=edit&idclient=" . $unClient['idclient'] . "'><img src= 'images/edit.png' width='40' heigth='40'> </a>";
+                echo "<a href='index.php?page=2&action=edit&idclient=" . $unClient['idclient'] . "' onclick='openform()'><img src= 'images/edit.png' width='40' heigth='40'> </a>";
                 echo "<a href='index.php?page=2&action=sup&idclient=" . $unClient['idclient'] . "'><img src= 'images/sup.png' width='40' heigth='40'> </a>";
                 echo "</div>";
                 echo "</td>";

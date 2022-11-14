@@ -30,9 +30,9 @@
             <td>Marque</td>
             <td>Nombre de kilomètres</td>
             <td>Enérgie</td>
-            <td>Id client</td>
             <?php
             if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
+              echo "<td>Id client</td>";
               echo "<td>Opérations</td>";
             }
             ?>
@@ -43,7 +43,7 @@
           if (isset($lesVehicules)) {
             foreach ($lesVehicules as $unVehicule) {
               if ($_SESSION['role'] == 'admin') {
-                echo "<tr class='bordereven'>";
+                echo "<tr>";
                 echo "<td> <div class='matr'>" . $unVehicule['matricule'] . "</div> </td>";
                 echo "<td>" . $unVehicule['marque'] . "</td>";
                 echo "<td>" . $unVehicule['nbkm'] . "</td>";
@@ -62,13 +62,12 @@
                 echo "</tr>";
               } elseif ($_SESSION['email'] == $unControleur->selectMailClient($_SESSION['email'], $unVehicule['idclient'])['email']) {
                 echo "<tr class='bordereven'>";
-                echo "<td>" . $unVehicule['matricule'] . "</td>";
+                echo "<td> <div class='matr'>" . $unVehicule['matricule'] . "</div> </td>";
                 echo "<td>" . $unVehicule['marque'] . "</td>";
                 echo "<td>" . $unVehicule['nbkm'] . "</td>";
                 echo "<td>";
+                echo "<div class=" . $unVehicule['energie'] . ">";
                 echo $unVehicule['energie'];
-                echo "</td>";
-                echo "<td>" . $unVehicule['idclient'] . "</td>";
                 if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
                   echo "<td>";
                   echo "<div>";

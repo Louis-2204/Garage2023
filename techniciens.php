@@ -1,7 +1,7 @@
 
 <?php
 if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
-  echo "<h2>Gestion des Techniciens</h2>";
+  echo "<h2 class='my-3'>Gestion des Techniciens</h2>";
   $leTechnicien = null;
   if (isset($_GET['action']) and isset($_GET['idtechnicien'])) {
     $action = $_GET['action'];

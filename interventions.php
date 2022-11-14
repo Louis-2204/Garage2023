@@ -1,6 +1,6 @@
 <?php
 if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
-  echo "<h2>Gestion des Interventions</h2>";
+  echo "<h2 class='my-3'>Gestion des Interventions</h2>";
   $lIntervention = null;
   if (isset($_GET['action']) and isset($_GET['idintervention'])) {
     $action = $_GET['action'];
