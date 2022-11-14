@@ -118,7 +118,7 @@
 
 
   .ouvert {
-    height: 400px;
+    height: 450px;
     -webkit-transition: height 0.5s linear;
     -moz-transition: height 0.5s linear;
     -ms-transition: height 0.5s linear;
