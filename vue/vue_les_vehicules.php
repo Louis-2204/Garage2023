@@ -41,7 +41,7 @@
             foreach ($lesVehicules as $unVehicule) {
               if ($_SESSION['role'] == 'admin') {
                 echo "<tr class='bordereven'>";
-                echo "<td>" . $unVehicule['matricule'] . "</td>";
+                echo "<td> <div class='matr'>" . $unVehicule['matricule'] . "</div> </td>";
                 echo "<td>" . $unVehicule['marque'] . "</td>";
                 echo "<td>" . $unVehicule['nbkm'] . "</td>";
                 echo "<td>" . $unVehicule['energie'] . "</td>";
@@ -104,5 +104,12 @@
     position: relative;
     top: 24px;
     margin-left: 10px;
+  }
+
+  .matr {
+    background-color: blue;
+    color: white;
+    border-radius: 10px;
+    text-align: center;
   }
 </style>
