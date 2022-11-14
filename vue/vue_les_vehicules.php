@@ -109,4 +109,9 @@
   .matr {
     color: blue;
   }
+
+
+  table {
+    text-align: center;
+  }
 </style>

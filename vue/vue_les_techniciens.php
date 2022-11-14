@@ -84,4 +84,8 @@
     top: 24px;
     margin-left: 10px;
   }
+
+  table {
+    text-align: center;
+  }
 </style>
