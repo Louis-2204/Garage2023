@@ -19,9 +19,14 @@
                 </td>
             </tr>
             <tr>
-                <td><label for="mdp">MDP:</label>
-                    <input class="form-control mb-2" type="password" name="mdp" id="mdp">
-                    <img id="eye" class="eye" src="./images/view.png" alt="" width="30px" height="30px" onclick="showhide()">
+                <td>
+                    <label for="mdp">MDP:</label>
+                    <div class="input-group">
+                        <input class="form-control mb-2" type="password" name="mdp" id="mdp">
+                        <span class="input-group-text mb-2">
+                            <img id="eye" class="eye" src="images/view.png" alt="" width="30px" height="30px" onclick="showhide()">
+                        </span>
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -39,19 +44,18 @@
 </div>
 <div class="col-md-4"></div>
 <style>
-    .eye{
-        position: relative;
-        top: -43px;
-        right: -480px;
+    .eye {
+        transition-duration: 0.3s;
     }
 
-    .eye:hover{
+    .eye:hover {
         cursor: pointer;
+        transform: scale(1.15);
     }
 
     form {
         position: absolute;
-        top: 30%;
+        top: 15%;
     }
 
     body {
@@ -65,7 +69,7 @@
         width: 33.33%;
     }
 
-    a{
+    a {
         color: black !important;
         font-size: 18px !important;
         font-weight: 400 !important;
@@ -74,16 +78,16 @@
 </style>
 
 <script>
-    function showhide(){
+    function showhide() {
         const input = document.getElementById('mdp');
         const eye = document.getElementById('eye');
 
-        if(input.getAttribute('type')=="password"){
-            input.setAttribute('type','text');
-            eye.setAttribute('src','./images/hide.png')
-        }else{
-            input.setAttribute('type','password');
-            eye.setAttribute('src','./images/view.png');
+        if (input.getAttribute('type') == "password") {
+            input.setAttribute('type', 'text');
+            eye.setAttribute('src', './images/hide.png')
+        } else {
+            input.setAttribute('type', 'password');
+            eye.setAttribute('src', './images/view.png');
         }
     }
 </script>
