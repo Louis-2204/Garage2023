@@ -1,7 +1,7 @@
 <div class="insert-container">
   <div class="dropdown" id="dropdown">
     <div class="div-texte">
-      <p>Insértion d'une Interventions</p>
+      <p>Insertion d'une Interventions</p>
     </div>
     <div class="div-arrow">
       <p id="arrow">></p>

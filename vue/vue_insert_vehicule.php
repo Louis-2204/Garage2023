@@ -1,7 +1,7 @@
 <div id="insert-container" class="insert-container">
   <div class="dropdown" id="dropdown">
     <div class="div-texte">
-      <p>Insértion d'un véhicule</p>
+      <p>Insertion d'un véhicule</p>
     </div>
     <div class="div-arrow">
       <p id="arrow">></p>
