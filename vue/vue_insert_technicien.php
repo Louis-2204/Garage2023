@@ -5,31 +5,31 @@
     <tr>
       <td>
         <label for="nom">Nom:</label>
-        <input class="form-control" type="text" name="nom" value="<?php if ($leTechnicien != null) echo $leTechnicien['nom']; ?>">
+        <input class="form-control" type="text" name="nom" id="nom" value="<?php if ($leTechnicien != null) echo $leTechnicien['nom']; ?>">
       </td>
     </tr>
     <tr>
       <td>
         <label for="prenom">Prénom:</label>
-        <input class="form-control" type="text" name="prenom" value="<?php if ($leTechnicien != null) echo $leTechnicien['prenom']; ?>">
+        <input class="form-control" type="text" name="prenom" id="prenom" value="<?php if ($leTechnicien != null) echo $leTechnicien['prenom']; ?>">
       </td>
     </tr>
     <tr>
       <td>
         <label for="qualification">Qualification:</label>
-        <input class="form-control" type="text" name="qualification" value="<?php if ($leTechnicien != null) echo $leTechnicien['qualification']; ?>">
+        <input class="form-control" type="text" name="qualification" id="qualification" value="<?php if ($leTechnicien != null) echo $leTechnicien['qualification']; ?>">
       </td>
     </tr>
     <tr>
       <td>
         <label for="email">Email:</label>
-        <input class="form-control" type="text" name="email" value="<?php if ($leTechnicien != null) echo $leTechnicien['email']; ?>">
+        <input class="form-control" type="text" name="email" id="email" value="<?php if ($leTechnicien != null) echo $leTechnicien['email']; ?>">
       </td>
     </tr>
     <tr>
       <td>
         <label for="tel">Téléphone:</label>
-        <input class="form-control mb-3" type="text" name="tel" value="<?php if ($leTechnicien != null) echo $leTechnicien['tel']; ?>">
+        <input class="form-control mb-3" type="text" name="tel" id="tel" value="<?php if ($leTechnicien != null) echo $leTechnicien['tel']; ?>">
       </td>
     </tr>
     <tr>

@@ -5,31 +5,31 @@
     <tr>
       <td>
         <label for="nom">Nom:</label>
-        <input class="form-control" type="text" name="nom" value="<?php if ($leClient != null) echo $leClient['nom']; ?>">
+        <input class="form-control" type="text" name="nom" id="nom" value="<?php if ($leClient != null) echo $leClient['nom']; ?>">
       </td>
     </tr>
     <tr>
       <td>
         <label for="prenom">Prénom:</label>
-        <input class="form-control" type="text" name="prenom" value="<?php if ($leClient != null) echo $leClient['prenom']; ?>">
+        <input class="form-control" type="text" name="prenom" id="prenom" value="<?php if ($leClient != null) echo $leClient['prenom']; ?>">
       </td>
     </tr>
     <tr>
       <td>
         <label for="adresse">Adresse:</label>
-        <input class="form-control" type="text" name="adresse" value="<?php if ($leClient != null) echo $leClient['adresse']; ?>">
+        <input class="form-control" type="text" name="adresse" id="adresse" value="<?php if ($leClient != null) echo $leClient['adresse']; ?>">
       </td>
     </tr>
     <tr>
       <td>
         <label for="email">Email</label>
-        <input class="form-control" type="text" name="email" value="<?php if ($leClient != null) echo $leClient['email']; ?>">
+        <input class="form-control" type="text" name="email" id="email" value="<?php if ($leClient != null) echo $leClient['email']; ?>">
       </td>
     </tr>
     <tr>
       <td>
         <label for="tel">Téléphone:</label>
-        <input class="form-control mb-3" type="text" name="tel" value="<?php if ($leClient != null) echo $leClient['tel']; ?>">
+        <input class="form-control mb-3" type="text" name="tel" id="tel" value="<?php if ($leClient != null) echo $leClient['tel']; ?>">
       </td>
     </tr>
     <tr>

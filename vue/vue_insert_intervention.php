@@ -5,25 +5,25 @@
     <tr>
       <td>
         <label for="dateinter">Date intervention:</label>
-        <input class="form-control" type="date" name="dateinter" value="<?php if ($lIntervention != null) echo $lIntervention['dateinter']; ?>">
+        <input class="form-control" type="date" name="dateinter" id="dateinter" value="<?php if ($lIntervention != null) echo $lIntervention['dateinter']; ?>">
       </td>
     </tr>
     <tr>
       <td>
         <label for="heure">Heure:</label>
-        <input class="form-control" type="time" name="heure" value="<?php if ($lIntervention != null) echo $lIntervention['heure']; ?>">
+        <input class="form-control" type="time" name="heure" id="heure" value="<?php if ($lIntervention != null) echo $lIntervention['heure']; ?>">
       </td>
     </tr>
     <tr>
       <td>
         <label for="prix">Prix:</label>
-        <input class="form-control" type="text" name="prix" value="<?php if ($lIntervention != null) echo $lIntervention['prix']; ?>">
+        <input class="form-control" type="text" name="prix" id="prix" value="<?php if ($lIntervention != null) echo $lIntervention['prix']; ?>">
       </td>
     </tr>
     <tr>
       <td>
         <label for="description">Description:</label>
-        <input class="form-control" type="text" name="description" value="<?php if ($lIntervention != null) echo $lIntervention['description']; ?>">
+        <input class="form-control" type="text" name="description" id="description" value="<?php if ($lIntervention != null) echo $lIntervention['description']; ?>">
       </td>
     </tr>
     <tr>
