@@ -85,7 +85,7 @@
     margin-left: 10px;
   }
 
-  table {
+  .table-responsive {
     text-align: center;
   }
 </style>
