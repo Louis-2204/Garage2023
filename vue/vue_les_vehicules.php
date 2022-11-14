@@ -107,10 +107,6 @@
   }
 
   .matr {
-    background-color: blue;
-    color: white;
-    border-radius: 10px;
-    text-align: center;
-    max-width: 200px;
+    color: blue;
   }
 </style>
