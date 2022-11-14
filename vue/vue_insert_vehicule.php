@@ -1,7 +1,7 @@
 <div id="insert-container" class="insert-container">
   <div class="dropdown" id="dropdown">
     <div class="div-texte">
-      <p>Insértion d'un véhicule</p>
+      <p>Insertion d'un véhicule</p>
     </div>
     <div class="div-arrow">
       <p id="arrow">></p>
@@ -13,25 +13,25 @@
         <tr>
           <td>
             <label for="matricule">Matricule:</label>
-            <input class="form-control" type="text" name="matricule" value="<?php if ($leVehicule != null) echo $leVehicule['matricule']; ?>">
+            <input class="form-control" type="text" name="matricule" id="matricule" value="<?php if ($leVehicule != null) echo $leVehicule['matricule']; ?>">
           </td>
         </tr>
         <tr>
           <td>
             <label for="marque">Marque:</label>
-            <input class="form-control" type="text" name="marque" value="<?php if ($leVehicule != null) echo $leVehicule['marque']; ?>">
+            <input class="form-control" type="text" name="marque" id="marque" value="<?php if ($leVehicule != null) echo $leVehicule['marque']; ?>">
           </td>
         </tr>
         <tr>
           <td>
             <label for="nbkm">Nombre de kilomètres:</label>
-            <input class="form-control" type="text" name="nbkm" value="<?php if ($leVehicule != null) echo $leVehicule['nbkm']; ?>">
+            <input class="form-control" type="text" name="nbkm" id="nbkm" value="<?php if ($leVehicule != null) echo $leVehicule['nbkm']; ?>">
           </td>
         </tr>
         <tr>
           <td>
             <label for="energie">Énergie</label>
-            <select name="energie" id="energie" class="form-select pointer mb-3 selectvehicule">
+            <select name="energie" class="form-select pointer mb-3 selectvehicule">
               <option value="Electrique" <?php if ($leVehicule != null && $leVehicule['energie'] == "Electrique") echo "selected" ?>>Éléctrique</option>
               <option value="Essence" <?php if ($leVehicule != null && $leVehicule['energie'] == "Essence") echo "selected" ?>>Essence</option>
               <option value="Diesel" <?php if ($leVehicule != null && $leVehicule['energie'] == "Diesel") echo "selected" ?>>Diesel</option>
