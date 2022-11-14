@@ -44,7 +44,9 @@
                 echo "<td> <div class='matr'>" . $unVehicule['matricule'] . "</div> </td>";
                 echo "<td>" . $unVehicule['marque'] . "</td>";
                 echo "<td>" . $unVehicule['nbkm'] . "</td>";
-                echo "<td>" . $unVehicule['energie'] . "</td>";
+                echo "<td>";
+                echo "<div class=" . $unVehicule['energie'] . ">";
+                echo $unVehicule['energie'];
                 echo "<td>" . $unVehicule['idclient'] . "</td>";
                 if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
                   echo "<td>";
@@ -60,7 +62,9 @@
                 echo "<td>" . $unVehicule['matricule'] . "</td>";
                 echo "<td>" . $unVehicule['marque'] . "</td>";
                 echo "<td>" . $unVehicule['nbkm'] . "</td>";
-                echo "<td>" . $unVehicule['energie'] . "</td>";
+                echo "<td>";
+                echo $unVehicule['energie'];
+                echo "</td>";
                 echo "<td>" . $unVehicule['idclient'] . "</td>";
                 if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
                   echo "<td>";
