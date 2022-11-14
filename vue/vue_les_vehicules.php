@@ -126,4 +126,54 @@
   .table-responsive {
     text-align: center;
   }
+
+  .Electrique {
+    background-color: rgb(255, 255, 0, 0.8);
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #808003;
+    max-width: 200px;
+    font-weight: 500;
+  }
+
+  .Essence {
+    background-color: rgb(0, 153, 0, 0.7);
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #015201;
+    max-width: 200px;
+    font-weight: 500;
+  }
+
+  .Diesel {
+    background-color: rgb(255, 165, 0, 0.8);
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #825501;
+    max-width: 200px;
+    font-weight: 500;
+  }
+
+  .Hybride {
+    background-color: rgb(255, 0, 0, 0.8);
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #590202;
+    max-width: 200px;
+    font-weight: 500;
+  }
+
+  .Bioethanol {
+    background-color: rgb(0, 0, 255, 0.75);
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #01014f;
+    max-width: 200px;
+    font-weight: 500;
+  }
 </style>
