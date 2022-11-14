@@ -141,6 +141,11 @@ class Controleur
   {
     return $this->unModele->verifConnection($email, $mdp);
   }
+
+  public function Sinscrire($email, $mdp,$nom,$prenom)
+  {
+    return $this->unModele->Sinscrire($email, $mdp,$nom,$prenom);
+  }
   /****************************Autres méthodes****************************/
   public function count($table)
   {

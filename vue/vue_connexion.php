@@ -18,6 +18,11 @@
                     <input class="btn btn-danger mb-4" type="reset" name="Annuler" value="Annuler">
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <a href="index.php?Inscription=true">Créer un compte</a>
+                </td>
+            </tr>
         </table>
     </form>
 </div>
@@ -37,5 +42,12 @@
 
     .w-33 {
         width: 33.33%;
+    }
+
+    a{
+        color: black !important;
+        font-size: 18px !important;
+        font-weight: 400 !important;
+        text-decoration: underline !important;
     }
 </style>

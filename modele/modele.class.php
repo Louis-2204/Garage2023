@@ -500,6 +500,34 @@ class Modele
       return null;
     }
   }
+
+  function Sinscrire($email, $mdp,$nom,$prenom)
+  {
+    $requete = "select * from user where email=:email";
+    $donnees = array(
+      ":email" => $email);
+    if ($this->unPdo != null) {
+      $select = $this->unPdo->prepare($requete);
+      $select->execute($donnees);
+      $existe = $select->fetch();
+      if($existe != false){
+        $unUser = "Existe";
+        return $unUser;
+      }else{
+        $requete = "insert into user values(null,:nom,:prenom,:email,:mdp,'user');";
+        $donnees = array(
+          ":email" => $email,
+          ":mdp" => $mdp,
+          ":nom" => $nom,
+          ":prenom" => $prenom
+        );
+        $select = $this->unPdo->prepare($requete);
+        $select->execute($donnees);
+      }
+    } else {
+      return null;
+    }
+  }
   /****************************Autres méthodes****************************/
   public function count($table)
   {
