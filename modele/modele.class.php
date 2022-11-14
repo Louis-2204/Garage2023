@@ -110,7 +110,7 @@ class Modele
     $requete = "select * from CLIENT where email = :email and idclient = :idclient;";
     $donnees = array(
       ":email" => $email,
-      ":idclient" => $idclient,
+      ":idclient" => $idclient
     );
     if ($this->unPdo != null) {
       //on prépare la requête
@@ -125,9 +125,9 @@ class Modele
   }
   function selectIdClient($email)
   {
-    $requete = "select * from CLIENT where email = :email";
+    $requete = "select * from CLIENT where email = :email;";
     $donnees = array(
-      ":email" => $email,
+      ":email" => $email
     );
     if ($this->unPdo != null) {
       //on prépare la requête
