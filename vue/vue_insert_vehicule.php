@@ -23,7 +23,13 @@
     <tr>
       <td>
         <label for="energie">Énergie</label>
-        <input class="form-control" type="text" name="energie" value="<?php if ($leVehicule != null) echo $leVehicule['energie']; ?>">
+        <select name="energie" id="energie" class="form-select pointer mb-3 selectvehicule">
+          <option value="Electrique" <?php if($leVehicule != null && $leVehicule['energie'] == "Electrique") echo "selected" ?>>Éléctrique</option>
+          <option value="Essence" <?php if($leVehicule != null && $leVehicule['energie'] == "Essence") echo "selected" ?> >Essence</option>
+          <option value="Diesel" <?php if($leVehicule != null && $leVehicule['energie'] == "Diesel") echo "selected" ?> >Diesel</option>
+          <option value="Hybride" <?php if($leVehicule != null && $leVehicule['energie'] == "Hybride") echo "selected" ?> >Hybride</option>
+          <option value="Bioethanol" <?php if($leVehicule != null && $leVehicule['energie'] == "Bioethanol") echo "selected" ?> >Bioéthanol</option>
+        </select>
       </td>
     </tr>
     <tr>
@@ -61,3 +67,9 @@
     </tr>
   </table>
 </form>
+
+<style>
+  .selectvehicule{
+    margin: 0px !important;
+  }
+</style>
