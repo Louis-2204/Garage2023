@@ -1,18 +1,21 @@
 <body class="large-screen">
   <h3>Liste des clients</h3>
   <form action="" method="POST">
-    <div class="filtrer">
-      <div class="filtrer1block">
-        <label for="mot">Filtrer par :</label>
-        <input class="form-control mb-2" type="text" name="mot" id="mot">
+    <div class="toptable col-md-10">
+      <?php
+      echo "<h4> Le nombre de clients est de : " . $unControleur->count("client")['nb'] . "</h4>";
+      ?>
+      <div class="filtrer">
+        <div class="filtrer1block">
+          <label for="mot">Filtrer par :</label>
+          <input class="form-control mb-2" type="text" name="mot" id="mot">
+        </div>
+        <div class="filtrer2block"> <input class="btn btn-primary mb-4" type="submit" name="Filtrer" value="Filtrer"></div>
       </div>
-      <div class="filtrer2block"> <input class="btn btn-primary mb-4" type="submit" name="Filtrer" value="Filtrer"></div>
     </div>
   </form>
   <br><br>
-  <?php
-  echo "<h4> Le nombre de clients est de : " . $unControleur->count("client")['nb'] . "</h4>";
-  ?>
+
   <div class="mb-5">
     <div class="wrap col-md-10 shadow">
       <table class="table-responsive card-list-table tab">
@@ -61,18 +64,24 @@
 </body>
 
 <style>
+  .toptable {
+    display: flex;
+    position: relative;
+    height: 66px;
+    top: 48px;
+  }
+
   h4 {
     font-size: 13px;
-    position: relative;
-    left: -517px;
+    position: absolute;
+    bottom: 0;
   }
 
   .filtrer {
     display: flex;
     width: 300px;
-    position: relative;
-    top: 70px;
-    right: -470px;
+    position: absolute;
+    right: -15px;
   }
 
   .filtrer1block {
@@ -81,10 +90,9 @@
 
   .filtrer2block {
     position: relative;
-    top: 24px;
     margin-left: 10px;
+    top: 24px;
   }
-
 
   .table-responsive {
     text-align: center;
