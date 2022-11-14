@@ -278,17 +278,10 @@ $unControleur = new Controleur();
 
 
 
-  .tab {
-    border: 1px solid #dfdfdf;
-  }
 
   .wrap {
     max-height: 70vh;
     overflow: auto;
-  }
-
-  .first {
-    top: -2px;
   }
 
   .first td {
@@ -297,7 +290,7 @@ $unControleur = new Controleur();
 
   .first tr {
     background: white;
-    box-shadow: 0 30px 40px rgba(0, 0, 0, .1);
+    box-shadow: 0 10px 10px rgba(0, 0, 0, .1);
   }
 
   /* ::-webkit-scrollbar {
@@ -322,10 +315,6 @@ $unControleur = new Controleur();
   html {
     height: 100%;
     width: 100%;
-  }
-
-  body {
-    font-family: "Roboto";
   }
 
   button.btn {
@@ -366,7 +355,7 @@ $unControleur = new Controleur();
   }
 
   body.large-screen .card-list-table tbody tr:nth-of-type(even) {
-    background: white;
+    background: #f5f6fb;
   }
 
   body.large-screen .card-list-table tbody td {
