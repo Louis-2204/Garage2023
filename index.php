@@ -20,31 +20,35 @@ $unControleur = new Controleur();
 
 
     if (!isset($_SESSION['email'])) {
-      if(isset($_GET['Inscription'])){
+      if (isset($_GET['Inscription'])) {
         require_once("vue/vue_inscription.php");
-      }else{
+      } else {
         require_once("vue/vue_connexion.php");
       }
     }
 
-    if(isset($_POST['Sinscrire'])){
+    if (isset($_POST['Sinscrire'])) {
       $email = $_POST['email'];
       $mdp = $_POST['mdp'];
       $nom = $_POST['nom'];
       $prenom = $_POST['prenom'];
-      $Sinscrire = $unControleur->Sinscrire($email,$mdp,$nom,$prenom);
-      if($Sinscrire == "Existe"){
-        echo "<div class='alert alert-danger'>Cette E-mail est déjà utilisée.</div>";
-      }else{
-        $unUser = $unControleur->verifConnection($email, $mdp);
-        if ($unUser == null) {
-          echo "<div class='alert alert-danger'>Verifiez vos identifiants</div>";
+      if (!$email || !$mdp || !$nom || !$prenom) {
+        echo "<div class='alert alert-danger'>Verifiez vos informations</div>";
+      } else {
+        $Sinscrire = $unControleur->Sinscrire($email, $mdp, $nom, $prenom);
+        if ($Sinscrire == "Existe") {
+          echo "<div class='alert alert-danger'>Cette E-mail est déjà utilisée.</div>";
         } else {
-          $_SESSION['email'] = $unUser['email'];
-          $_SESSION['nom'] = $unUser['nom'];
-          $_SESSION['prenom'] = $unUser['prenom'];
-          $_SESSION['role'] = $unUser['role'];
-          header("location: index.php?page=0");
+          $unUser = $unControleur->verifConnection($email, $mdp);
+          if ($unUser == null) {
+            echo "<div class='alert alert-danger'>Verifiez vos identifiants</div>";
+          } else {
+            $_SESSION['email'] = $unUser['email'];
+            $_SESSION['nom'] = $unUser['nom'];
+            $_SESSION['prenom'] = $unUser['prenom'];
+            $_SESSION['role'] = $unUser['role'];
+            header("location: index.php?page=0");
+          }
         }
       }
     }

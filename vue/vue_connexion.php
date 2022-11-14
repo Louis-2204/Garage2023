@@ -9,7 +9,7 @@
                 </td>
             </tr>
             <tr>
-                <td><label for="mdp">MDP:</label>
+                <td><label for="mdp">Mot de passe:</label>
                     <input class="form-control mb-2" type="password" name="mdp" id="mdp">
                 </td>
             </tr>
@@ -44,7 +44,7 @@
         width: 33.33%;
     }
 
-    a{
+    a {
         color: black !important;
         font-size: 18px !important;
         font-weight: 400 !important;

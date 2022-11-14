@@ -5,12 +5,12 @@
         <table class="col-md-12">
             <tr>
                 <td><label for="nom">Nom :</label>
-                    <input class="form-control mb-2" type="text" name="nom" id="email">
+                    <input class="form-control mb-2" type="text" name="nom" id="nom">
                 </td>
             </tr>
             <tr>
-                <td><label for="">Prénom :</label>
-                    <input class="form-control mb-2" type="text" name="prenom" id="email">
+                <td><label for="prenom">Prénom :</label>
+                    <input class="form-control mb-2" type="text" name="prenom" id="prenom">
                 </td>
             </tr>
             <tr>
@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <td>
-                    <label for="mdp">MDP:</label>
+                    <label for="mdp">Mot de passe:</label>
                     <div class="input-group">
                         <input class="form-control mb-2" type="password" name="mdp" id="mdp">
                         <span class="input-group-text mb-2">
