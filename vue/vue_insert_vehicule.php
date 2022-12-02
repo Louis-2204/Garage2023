@@ -45,7 +45,9 @@
             <label for="idclient">Id Client:</label>
             <select class=" form-select pointer mb-3" name="idclient" value="<?php if ($leVehicule != null) echo $leVehicule['idclient']; ?>">
               <?php
-              $lesClients = $unControleur->selectAllClients();
+              $unControleur->setTable("client");
+              $lesClients = $unControleur->selectAll();
+              $unControleur->setTable("vehicule");
               foreach ($lesClients as $unClient) {
                 if ($leVehicule != null) {
                   if ($leVehicule['idclient'] == $unClient['idclient']) {

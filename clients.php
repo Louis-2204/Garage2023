@@ -1,4 +1,5 @@
 <?php
+$unControleur->setTable("client");
 if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
   echo "<h2 class='my-3'>Gestion des Clients</h2>";
   $leClient = null;
@@ -7,10 +8,10 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
     $idclient = $_GET['idclient'];
     switch ($action) {
       case "sup":
-        $unControleur->deleteClient($idclient);
+        $unControleur->delete("idclient", $idclient);
         break;
       case "edit":
-        $leClient = $unControleur->selectWhereClient($idclient);
+        $leClient = $unControleur->selectWhere("idclient", $idclient);
         break;
     }
   }
@@ -24,24 +25,34 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
       "email" => $_POST['email'],
       "tel" => $_POST['tel']
     );
-    $unControleur->insertClient($tab);
+    $unControleur->insert($tab);
   }
 
   //extraction de tous les clients
-  $lesClients = $unControleur->selectAllClients();
+  $lesClients = $unControleur->selectAll();
 
 
   if (isset($_POST['Modifier'])) {
-    $unControleur->updateClient($_POST);
+    $unControleur->update(
+      array(
+        "nom" => $_POST['nom'],
+        "prenom" => $_POST['prenom'],
+        "adresse" => $_POST['adresse'],
+        "email" => $_POST['email'],
+        "tel" => $_POST['tel']
+      ),
+      "idclient",
+      $_POST['idclient']
+    );
     header("Location: index.php?page=2");
   }
   require_once("vue/vue_insert_client.php");
 
   if (isset($_POST['Filtrer'])) {
     $mot = $_POST['mot'];
-    $lesClients = $unControleur->selectLikeClients($mot);
+    $lesClients = $unControleur->selectLike($mot, array("nom", "prenom", "adresse", "email", "tel"));
   } else {
-    $lesClients = $unControleur->selectAllClients();
+    $lesClients = $unControleur->selectAll();
   }
 
   require_once("vue/vue_les_clients.php");

@@ -1,5 +1,6 @@
 
 <?php
+$unControleur->setTable("technicien");
 if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
   echo "<h2 class='my-3'>Gestion des Techniciens</h2>";
   $leTechnicien = null;
@@ -8,10 +9,10 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
     $idtechnicien = $_GET['idtechnicien'];
     switch ($action) {
       case "sup":
-        $unControleur->deleteTechnicien($idtechnicien);
+        $unControleur->delete("idtechnicien", $idtechnicien);
         break;
       case "edit":
-        $leTechnicien = $unControleur->selectWhereTechnicien($idtechnicien);
+        $leTechnicien = $unControleur->selectWhere("idtechnicien", $idtechnicien);
         break;
     }
   }
@@ -25,15 +26,25 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
       "email" => $_POST['email'],
       "tel" => $_POST['tel'],
     );
-    $unControleur->insertTechnicien($tab);
+    $unControleur->insert($tab);
   }
 
   //extraction de tous les techniciens
-  $lesTechniciens = $unControleur->selectAllTechniciens();
+  $lesTechniciens = $unControleur->selectAll();
 
 
   if (isset($_POST['Modifier'])) {
-    $unControleur->updateTechnicien($_POST);
+    $unControleur->update(
+      array(
+        "nom" => $_POST['nom'],
+        "prenom" => $_POST['prenom'],
+        "qualification" => $_POST['qualification'],
+        "email" => $_POST['email'],
+        "tel" => $_POST['tel'],
+      ),
+      "idtechnicien",
+      $_POST['idtechnicien']
+    );
     header("Location: index.php?page=3");
   }
   require_once("vue/vue_insert_technicien.php");
@@ -41,9 +52,9 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
 
   if (isset($_POST['Filtrer'])) {
     $mot = $_POST['mot'];
-    $lesTechniciens = $unControleur->selectLikeTechniciens($mot);
+    $lesTechniciens = $unControleur->selectLike($mot, array("nom", "prenom", "qualification", "email", "tel"));
   } else {
-    $lesTechniciens = $unControleur->selectAllTechniciens();
+    $lesTechniciens = $unControleur->selectAll();
   }
 
   require_once("vue/vue_les_techniciens.php");

@@ -18,7 +18,6 @@ $unControleur = new Controleur();
   <center>
     <?php
 
-
     if (!isset($_SESSION['email'])) {
       if (isset($_GET['Inscription'])) {
         require_once("vue/vue_inscription.php");

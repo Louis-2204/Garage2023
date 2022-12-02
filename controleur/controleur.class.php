@@ -11,33 +11,36 @@ class Controleur
     $this->unModele = new Modele();
   }
 
-  //Clients
-
-  public function insertClient($tab)
+  public function setTable($uneTable)
   {
-    //on contrôle les données avant insertion dans le modele
-    $this->unModele->insertClient($tab);
+    $this->unModele->setTable($uneTable);
   }
-  public function selectAllClients()
+  public function selectAll()
   {
-    return $this->unModele->selectAllClients();
+    $lesResultats = $this->unModele->selectAll();
+    return $lesResultats;
   }
-  public function deleteClient($idclient)
+  public function insert($tab)
   {
-    return $this->unModele->deleteClient($idclient);
+    $this->unModele->insert($tab);
   }
-  public function updateClient($tab)
+  public function selectLike($mot, $tab)
   {
-    return $this->unModele->updateClient($tab);
+    $lesResultats = $this->unModele->selectLike($mot, $tab);
+    return $lesResultats;
   }
-  public function selectWhereClient($idclient)
+  public function delete($id, $valeur)
   {
-    return $this->unModele->selectWhereClient($idclient);
+    $this->unModele->delete($id, $valeur);
   }
-  public function selectLikeClients($mot)
+  public function selectWhere($id, $valeur)
   {
-    $lesClients = $this->unModele->selectLikeClients($mot);
-    return $lesClients;
+    $unResultat = $this->unModele->selectWhere($id, $valeur);
+    return $unResultat;
+  }
+  public function update($tab, $id, $valeurId)
+  {
+    $this->unModele->update($tab, $id, $valeurId);
   }
   public function selectMailClient($email, $idclient)
   {
@@ -51,100 +54,16 @@ class Controleur
   {
     return $this->unModele->countVehiculeUser($idclient);
   }
-  //Techniciens
 
-  public function insertTechnicien($tab)
-  {
-    //on contrôle les données avant insertion dans le modele
-    $this->unModele->insertTechnicien($tab);
-  }
-  public function selectAllTechniciens()
-  {
-    return $this->unModele->selectAllTechniciens();
-  }
-  public function deleteTechnicien($idtechnicien)
-  {
-    return $this->unModele->deleteTechnicien($idtechnicien);
-  }
-  public function updateTechnicien($tab)
-  {
-    return $this->unModele->updateTechnicien($tab);
-  }
-  public function selectWhereTechnicien($idtechnicien)
-  {
-    return $this->unModele->selectWhereTechnicien($idtechnicien);
-  }
-  public function selectLikeTechniciens($mot)
-  {
-    $lesTechniciens = $this->unModele->selectLikeTechniciens($mot);
-    return $lesTechniciens;
-  }
-
-  //Vehicules
-
-  public function insertVehicule($tab)
-  {
-    //on contrôle les données avant insertion dans le modele
-    $this->unModele->insertVehicule($tab);
-  }
-  public function selectAllVehicules()
-  {
-    return $this->unModele->selectAllVehicules();
-  }
-  public function deleteVehicule($idvehicule)
-  {
-    return $this->unModele->deleteVehicule($idvehicule);
-  }
-  public function updateVehicule($tab)
-  {
-    return $this->unModele->updateVehicule($tab);
-  }
-  public function selectWhereVehicule($idvehicule)
-  {
-    return $this->unModele->selectWhereVehicule($idvehicule);
-  }
-  public function selectLikeVehicules($mot)
-  {
-    $lesVehicules = $this->unModele->selectLikeVehicules($mot);
-    return $lesVehicules;
-  }
-  //Interventions
-
-  public function insertIntervention($tab)
-  {
-    //on contrôle les données avant insertion dans le modele
-    $this->unModele->insertIntervention($tab);
-  }
-  public function selectAllInterventions()
-  {
-    return $this->unModele->selectAllInterventions();
-  }
-  public function deleteIntervention($idintervention)
-  {
-    return $this->unModele->deleteIntervention($idintervention);
-  }
-  public function updateIntervention($tab)
-  {
-    return $this->unModele->updateIntervention($tab);
-  }
-  public function selectWhereIntervention($idintervention)
-  {
-    return $this->unModele->selectWhereIntervention($idintervention);
-  }
-  public function selectLikeInterventions($mot)
-  {
-    $lesInterventions = $this->unModele->selectLikeInterventions($mot);
-    return $lesInterventions;
-  }
   /****************************LES USERS****************************/
   public function verifConnection($email, $mdp)
   {
     return $this->unModele->verifConnection($email, $mdp);
   }
 
-  public function Sinscrire($email, $mdp,$nom,$prenom)
+  public function Sinscrire($email, $mdp, $nom, $prenom)
   {
-    return $this->unModele->Sinscrire($email, $mdp,$nom,$prenom);
+    return $this->unModele->Sinscrire($email, $mdp, $nom, $prenom);
   }
   /****************************Autres méthodes****************************/
   public function count($table)

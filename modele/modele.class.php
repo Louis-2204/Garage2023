@@ -2,6 +2,7 @@
 class Modele
 {
   private $unPdo = null;
+  private $table; // table générique du modèle
   //PDO: classe en php pour se connecter à la base de données; P:PHP, D:Data, O:Object
 
   public function __construct()
@@ -15,96 +16,99 @@ class Modele
       echo $exp->getMessage();
     }
   }
-
-  //Clients
-
-  public function insertClient($tab)
+  public function setTable($uneTable)
   {
-    $requete = "insert into client values(null, :nom, :prenom, :adresse, :email, :tel);";
-    $donnees = array(
-      ":nom" => $tab['nom'],
-      ":prenom" => $tab['prenom'],
-      ":adresse" => $tab['adresse'],
-      ":email" => $tab['email'],
-      ":tel" => $tab['tel']
-    );
-    if ($this->unPdo != null) {
-      //on prépare la requête
-      $select = $this->unPdo->prepare($requete);
-      //on exécute la requête
-      $select->execute($donnees);
-    }
+    $this->table = $uneTable;
   }
-  public function selectAllClients()
+
+  public function selectAll()
   {
-    $requete = "select * from client;";
     if ($this->unPdo != null) {
-      //on prépare la requête
+      $requete = "select * from " . $this->table . ";";
       $select = $this->unPdo->prepare($requete);
-      //on exécute la requête
       $select->execute();
-      //on récupère les clients et on les renvoient
-      return $select->fetchAll();
+      $lesResultats = $select->fetchAll();
+      return $lesResultats;
     } else {
       return null;
     }
   }
 
-  function deleteClient($idclient)
+  public function insert($tab)
   {
-    $requete = "delete from CLIENT where idclient = :idclient;";
-    $donnees = array(
-      ":idclient" => $idclient
-    );
     if ($this->unPdo != null) {
-      //on prépare la requête
-      $select = $this->unPdo->prepare($requete);
-      //on exécute la requête
-      $select->execute($donnees);
-    } else {
-      return null;
+      $chaineChamps = array();
+      foreach ($tab as $cle => $valeur) {
+        $tabChamps[] = ":" . $cle;
+        $donnees[":" . $cle] = $valeur;
+      }
+      $chaineChamps = implode(",", $tabChamps);
+      $requete = "insert into " . $this->table . " values (null, " . $chaineChamps . ");";
+      $insert = $this->unPdo->prepare($requete);
+      $insert->execute($donnees);
     }
   }
-
-  function updateClient($tab)
+  public function selectLike($mot, $tab)
   {
-    $requete = "update CLIENT set nom = :nom, prenom = :prenom, adresse = :adresse, email = :email, tel = :tel where idclient= :idclient;";
-    $donnees = array(
-      ":nom" => $tab['nom'],
-      ":prenom" => $tab['prenom'],
-      ":adresse" => $tab['adresse'],
-      ":email" => $tab['email'],
-      ":tel" => $tab['tel'],
-      ":idclient" => $tab['idclient']
-    );
     if ($this->unPdo != null) {
-      //on prépare la requête
+      $tabChamps = array();
+      foreach ($tab as $cle) {
+        $tabChamps[] = $cle . " like :mot ";
+      }
+      $chaineChamps = implode(" or ", $tabChamps);
+      $requete = "select * from " . $this->table . " where " . $chaineChamps . ";";
+      $donnees = array(
+        ":mot" => "%" . $mot . "%",
+      );
       $select = $this->unPdo->prepare($requete);
-      //on exécute la requête
       $select->execute($donnees);
+      $lesResulats = $select->fetchAll();
+      return $lesResulats;
     } else {
       return null;
     }
   }
-
-  function selectWhereClient($idclient)
+  public function delete($id, $valeur)
   {
-    $requete = "select * from CLIENT where idclient = :idclient;";
-    $donnees = array(
-      ":idclient" => $idclient
-    );
     if ($this->unPdo != null) {
-      //on prépare la requête
+      $requete = "delete from " . $this->table . " where " . $id . " = :" . $id . ";";
+      $donnees = array(
+        ":" . $id => $valeur,
+      );
+      $delete = $this->unPdo->prepare($requete);
+      $delete->execute($donnees);
+    }
+  }
+  public function selectWhere($id, $valeur)
+  {
+    if ($this->unPdo != null) {
+      $requete = "select * from " . $this->table . " where " . $id . " = :" . $id . ";";
+      $donnees = array(
+        ":" . $id => $valeur,
+      );
       $select = $this->unPdo->prepare($requete);
-      //on exécute la requête
       $select->execute($donnees);
-      $unClient = $select->fetch();
-      return $unClient;
+      $unResultat = $select->fetch();
+      return $unResultat;
     } else {
       return null;
     }
   }
-
+  public function update($tab, $id, $valeurId)
+  {
+    if ($this->unPdo != null) {
+      $tabChamps = array();
+      foreach ($tab as $cle => $valeur) {
+        $tabChamps[] = $cle . " = :" . $cle;
+        $donnees[":" . $cle] = $valeur;
+      }
+      $chaineChamps = implode(",", $tabChamps);
+      $requete = "update " . $this->table . " set " . $chaineChamps . " where " . $id . " = :" . $id . ";";
+      $donnees[":" . $id] = $valeurId;
+      $update = $this->unPdo->prepare($requete);
+      $update->execute($donnees);
+    }
+  }
   function selectMailClient($email, $idclient)
   {
     $requete = "select * from CLIENT where email = :email and idclient = :idclient;";
@@ -140,22 +144,6 @@ class Modele
       return null;
     }
   }
-
-  function selectLikeClients($mot)
-  {
-    if ($this->unPdo != null) {
-      $requete = "select * from client where nom like :mot or prenom like :mot or adresse like :mot or email like :mot or tel like :mot;";
-      $donnees = array(
-        ":mot" => "%" . $mot . "%",
-      );
-      $select = $this->unPdo->prepare($requete);
-      $select->execute($donnees);
-      $lesClients = $select->fetchAll();
-      return $lesClients;
-    } else {
-      return null;
-    }
-  }
   function countVehiculeUser($idclient)
   {
     if ($this->unPdo != null) {
@@ -167,318 +155,6 @@ class Modele
       $select->execute($donnees);
       $unResultat = $select->fetch();
       return $unResultat;
-    } else {
-      return null;
-    }
-  }
-  //Techniciens
-
-  public function insertTechnicien($tab)
-  {
-    $requete = "insert into technicien values(null, :nom, :prenom, :qualification, :email, :tel);";
-    $donnees = array(
-      ":nom" => $tab['nom'],
-      ":prenom" => $tab['prenom'],
-      ":qualification" => $tab['qualification'],
-      ":email" => $tab['email'],
-      ":tel" => $tab['tel'],
-    );
-    if ($this->unPdo != null) {
-      //on prépare la requête
-      $select = $this->unPdo->prepare($requete);
-      //on exécute la requête
-      $select->execute($donnees);
-    }
-  }
-  public function selectAllTechniciens()
-  {
-    $requete = "select * from technicien;";
-    if ($this->unPdo != null) {
-      //on prépare la requête
-      $select = $this->unPdo->prepare($requete);
-      //on exécute la requête
-      $select->execute();
-      //on récupère les techniciens et on les renvoient
-      return $select->fetchAll();
-    } else {
-      return null;
-    }
-  }
-
-  function deleteTechnicien($idtechnicien)
-  {
-    $requete = "delete from technicien where idtechnicien = :idtechnicien;";
-    $donnees = array(
-      ":idtechnicien" => $idtechnicien
-    );
-    if ($this->unPdo != null) {
-      //on prépare la requête
-      $select = $this->unPdo->prepare($requete);
-      //on exécute la requête
-      $select->execute($donnees);
-    } else {
-      return null;
-    }
-  }
-
-  function updateTechnicien($tab)
-  {
-    $requete = "update technicien set nom = :nom, prenom = :prenom, qualification = :qualification, email = :email, tel = :tel where idtechnicien= :idtechnicien;";
-    $donnees = array(
-      ":nom" => $tab['nom'],
-      ":prenom" => $tab['prenom'],
-      ":qualification" => $tab['qualification'],
-      ":email" => $tab['email'],
-      ":tel" => $tab['tel'],
-      ":idtechnicien" => $tab['idtechnicien']
-    );
-    if ($this->unPdo != null) {
-      //on prépare la requête
-      $select = $this->unPdo->prepare($requete);
-      //on exécute la requête
-      $select->execute($donnees);
-    } else {
-      return null;
-    }
-  }
-
-  function selectWhereTechnicien($idtechnicien)
-  {
-    $requete = "select * from technicien where idtechnicien = :idtechnicien;";
-    $donnees = array(
-      ":idtechnicien" => $idtechnicien
-    );
-    if ($this->unPdo != null) {
-      //on prépare la requête
-      $select = $this->unPdo->prepare($requete);
-      //on exécute la requête
-      $select->execute($donnees);
-      $unTechnicien = $select->fetch();
-      return $unTechnicien;
-    } else {
-      return null;
-    }
-  }
-  function selectLikeTechniciens($mot)
-  {
-    if ($this->unPdo != null) {
-      $requete = "select * from technicien where nom like :mot or prenom like :mot or qualification like :mot or email like :mot or tel like :mot;";
-      $donnees = array(
-        ":mot" => "%" . $mot . "%",
-      );
-      $select = $this->unPdo->prepare($requete);
-      $select->execute($donnees);
-      $lesClients = $select->fetchAll();
-      return $lesClients;
-    } else {
-      return null;
-    }
-  }
-
-  //Véhicules
-
-  public function insertVehicule($tab)
-  {
-    $requete = "insert into vehicule values(null, :matricule, :marque, :nbkm, :energie, :idclient);";
-    $donnees = array(
-      ":matricule" => $tab['matricule'],
-      ":marque" => $tab['marque'],
-      ":nbkm" => $tab['nbkm'],
-      ":energie" => $tab['energie'],
-      ":idclient" => $tab['idclient']
-    );
-    if ($this->unPdo != null) {
-      //on prépare la requête
-      $select = $this->unPdo->prepare($requete);
-      //on exécute la requête
-      $select->execute($donnees);
-    }
-  }
-  public function selectAllVehicules()
-  {
-    $requete = "select * from vehicule;";
-    if ($this->unPdo != null) {
-      //on prépare la requête
-      $select = $this->unPdo->prepare($requete);
-      //on exécute la requête
-      $select->execute();
-      //on récupère les véhicules et on les renvoient
-      return $select->fetchAll();
-    } else {
-      return null;
-    }
-  }
-
-  function deleteVehicule($idvehicule)
-  {
-    $requete = "delete from vehicule where idvehicule = :idvehicule;";
-    $donnees = array(
-      ":idvehicule" => $idvehicule
-    );
-    if ($this->unPdo != null) {
-      //on prépare la requête
-      $select = $this->unPdo->prepare($requete);
-      //on exécute la requête
-      $select->execute($donnees);
-    } else {
-      return null;
-    }
-  }
-
-  function updateVehicule($tab)
-  {
-    $requete = "update vehicule set matricule = :matricule, marque = :marque, nbkm = :nbkm, energie = :energie, idclient = :idclient where idvehicule= :idvehicule;";
-    $donnees = array(
-      ":matricule" => $tab['matricule'],
-      ":marque" => $tab['marque'],
-      ":nbkm" => $tab['nbkm'],
-      ":energie" => $tab['energie'],
-      ":idclient" => $tab['idclient'],
-      ":idvehicule" => $tab['idvehicule']
-    );
-    if ($this->unPdo != null) {
-      //on prépare la requête
-      $select = $this->unPdo->prepare($requete);
-      //on exécute la requête
-      $select->execute($donnees);
-    } else {
-      return null;
-    }
-  }
-
-  function selectWhereVehicule($idvehicule)
-  {
-    $requete = "select * from vehicule where idvehicule = :idvehicule;";
-    $donnees = array(
-      ":idvehicule" => $idvehicule
-    );
-    if ($this->unPdo != null) {
-      //on prépare la requête
-      $select = $this->unPdo->prepare($requete);
-      //on exécute la requête
-      $select->execute($donnees);
-      $unVehicule = $select->fetch();
-      return $unVehicule;
-    } else {
-      return null;
-    }
-  }
-  function selectLikeVehicules($mot)
-  {
-    if ($this->unPdo != null) {
-      $requete = "select * from vehicule where matricule like :mot or marque like :mot or nbkm like :mot or energie like :mot or idclient like :mot;";
-      $donnees = array(
-        ":mot" => "%" . $mot . "%",
-      );
-      $select = $this->unPdo->prepare($requete);
-      $select->execute($donnees);
-      $lesVehicules = $select->fetchAll();
-      return $lesVehicules;
-    } else {
-      return null;
-    }
-  }
-  //Interventions
-
-  public function insertIntervention($tab)
-  {
-    $requete = "insert into intervention values(null, :dateinter, :heure, :prix, :description, :idvehicule, :idtechnicien);";
-    $donnees = array(
-      ":dateinter" => $tab['dateinter'],
-      ":heure" => $tab['heure'],
-      ":prix" => $tab['prix'],
-      ":description" => $tab['description'],
-      ":idvehicule" => $tab['idvehicule'],
-      ":idtechnicien" => $tab['idtechnicien']
-    );
-    if ($this->unPdo != null) {
-      //on prépare la requête
-      $select = $this->unPdo->prepare($requete);
-      //on exécute la requête
-      $select->execute($donnees);
-    }
-  }
-  public function selectAllInterventions()
-  {
-    $requete = "select * from intervention;";
-    if ($this->unPdo != null) {
-      //on prépare la requête
-      $select = $this->unPdo->prepare($requete);
-      //on exécute la requête
-      $select->execute();
-      //on récupère les interventions et on les renvoient
-      return $select->fetchAll();
-    } else {
-      return null;
-    }
-  }
-
-  function deleteIntervention($idintervention)
-  {
-    $requete = "delete from intervention where idintervention = :idintervention;";
-    $donnees = array(
-      ":idintervention" => $idintervention
-    );
-    if ($this->unPdo != null) {
-      //on prépare la requête
-      $select = $this->unPdo->prepare($requete);
-      //on exécute la requête
-      $select->execute($donnees);
-    } else {
-      return null;
-    }
-  }
-
-  function updateIntervention($tab)
-  {
-    $requete = "update intervention set dateinter = :dateinter, heure = :heure, prix = :prix, description = :description, idvehicule = :idvehicule, idtechnicien = :idtechnicien where idintervention= :idintervention;";
-    $donnees = array(
-      ":dateinter" => $tab['dateinter'],
-      ":heure" => $tab['heure'],
-      ":prix" => $tab['prix'],
-      ":description" => $tab['description'],
-      ":idvehicule" => $tab['idvehicule'],
-      ":idtechnicien" => $tab['idtechnicien'],
-      ":idintervention" => $tab['idintervention']
-    );
-    if ($this->unPdo != null) {
-      //on prépare la requête
-      $select = $this->unPdo->prepare($requete);
-      //on exécute la requête
-      $select->execute($donnees);
-    } else {
-      return null;
-    }
-  }
-
-  function selectWhereIntervention($idintervention)
-  {
-    $requete = "select * from intervention where idintervention = :idintervention;";
-    $donnees = array(
-      ":idintervention" => $idintervention
-    );
-    if ($this->unPdo != null) {
-      //on prépare la requête
-      $select = $this->unPdo->prepare($requete);
-      //on exécute la requête
-      $select->execute($donnees);
-      $uneIntervention = $select->fetch();
-      return $uneIntervention;
-    } else {
-      return null;
-    }
-  }
-  function selectLikeInterventions($mot)
-  {
-    if ($this->unPdo != null) {
-      $requete = "select * from intervention where dateinter like :mot or heure like :mot or prix like :mot or description like :mot or idvehicule like :mot or idtechnicien like :mot;";
-      $donnees = array(
-        ":mot" => "%" . $mot . "%",
-      );
-      $select = $this->unPdo->prepare($requete);
-      $select->execute($donnees);
-      $lesInterventions = $select->fetchAll();
-      return $lesInterventions;
     } else {
       return null;
     }
@@ -501,19 +177,20 @@ class Modele
     }
   }
 
-  function Sinscrire($email, $mdp,$nom,$prenom)
+  function Sinscrire($email, $mdp, $nom, $prenom)
   {
     $requete = "select * from user where email=:email";
     $donnees = array(
-      ":email" => $email);
+      ":email" => $email
+    );
     if ($this->unPdo != null) {
       $select = $this->unPdo->prepare($requete);
       $select->execute($donnees);
       $existe = $select->fetch();
-      if($existe != false){
+      if ($existe != false) {
         $unUser = "Existe";
         return $unUser;
-      }else{
+      } else {
         $requete = "insert into user values(null,:nom,:prenom,:email,:mdp,'user');";
         $donnees = array(
           ":email" => $email,
