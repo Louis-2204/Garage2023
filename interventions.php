@@ -1,4 +1,5 @@
 <?php
+$unControleur->setTable("intervention");
 if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
   echo "<h2 class='my-3'>Gestion des Interventions</h2>";
   $lIntervention = null;
@@ -7,10 +8,10 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
     $idintervention = $_GET['idintervention'];
     switch ($action) {
       case "sup":
-        $unControleur->deleteIntervention($idintervention);
+        $unControleur->delete("idintervention", $idintervention);
         break;
       case "edit":
-        $lIntervention = $unControleur->selectWhereIntervention($idintervention);
+        $leTechnicien = $unControleur->selectWhere("idintervention", $idintervention);
         break;
     }
   }
@@ -29,20 +30,31 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
   }
 
   //extraction de toutes les interventions
-  $lesInterventions = $unControleur->selectAllInterventions();
+  $lesInterventions = $unControleur->selectAll();
 
 
   if (isset($_POST['Modifier'])) {
-    $unControleur->updateIntervention($_POST);
+    $unControleur->update(
+      array(
+        "dateinter" => $_POST['dateinter'],
+        "heure" => $_POST['heure'],
+        "prix" => $_POST['prix'],
+        "description" => $_POST['description'],
+        "idvehicule" => $_POST['idvehicule'],
+        "idtechnicien" => $_POST['idtechnicien']
+      ),
+      "idintervention",
+      $_POST['idintervention']
+    );
     header("Location: index.php?page=5");
   }
   require_once("vue/vue_insert_intervention.php");
 
   if (isset($_POST['Filtrer'])) {
     $mot = $_POST['mot'];
-    $lesInterventions = $unControleur->selectLikeInterventions($mot);
+    $lesInterventions = $unControleur->selectLike($mot, array("dateinter", "heure", "prix", "description", "idvehicule", "idtechnicien"));
   } else {
-    $lesInterventions = $unControleur->selectAllInterventions();
+    $lesInterventions = $unControleur->selectAll();
   }
 
   require_once("vue/vue_les_interventions.php");

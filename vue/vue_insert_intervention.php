@@ -40,7 +40,9 @@
             <label for="idvehicule">Id Véhicule</label>
             <select class="form-select pointer" name="idvehicule" value="<?php if ($lIntervention != null) echo $lIntervention['idvehicule']; ?>">
               <?php
-              $lesVehicules = $unControleur->selectAllVehicules();
+              $unControleur->setTable("vehicule");
+              $lesVehicules = $unControleur->selectAll();
+              $unControleur->setTable("intervention");
               foreach ($lesVehicules as $unVehicule) {
                 if ($lIntervention != null) {
                   if ($lIntervention['idintervention'] == $unVehicule['idvehicule']) {
@@ -64,7 +66,9 @@
             <label for="idtechnicien">Id Technicien</label>
             <select class=" form-select pointer mb-3" name="idtechnicien" value="<?php if ($lIntervention != null) echo $lIntervention['idtechnicien']; ?>">
               <?php
-              $lesTechniciens = $unControleur->selectAllTechniciens();
+              $unControleur->setTable("technicien");
+              $lesTechniciens = $unControleur->selectAll();
+              $unControleur->setTable("intervention");
               foreach ($lesTechniciens as $unTechnicien) {
                 if ($lIntervention != null) {
                   if ($lIntervention['idintervention'] == $unTechnicien['idtechnicien']) {
