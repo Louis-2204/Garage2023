@@ -26,7 +26,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
       "idvehicule" => $_POST['idvehicule'],
       "idtechnicien" => $_POST['idtechnicien']
     );
-    $unControleur->insertIntervention($tab);
+    $unControleur->insert($tab);
   }
 
   //extraction de toutes les interventions
